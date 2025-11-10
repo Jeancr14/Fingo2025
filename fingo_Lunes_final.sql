@@ -11,7 +11,12 @@ CREATE TABLE usuarios (
     fecha_registro TIMESTAMP DEFAULT systimestamp
 );
 
+/*
+Table USUARIOS creado.*/
+
 CREATE SEQUENCE seq_usuarios START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*
+Sequence SEQ_USUARIOS creado.*/
 
 -- categorias
 CREATE TABLE categorias (
@@ -24,7 +29,12 @@ CREATE TABLE categorias (
         REFERENCES usuarios ( id )
 );
 
+/*
+Table CATEGORIAS creado.*/
+
 CREATE SEQUENCE seq_categorias START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*
+Sequence SEQ_CATEGORIAS creado.*/
 
 -- finanzas
 CREATE TABLE finanzas (
@@ -41,8 +51,12 @@ CREATE TABLE finanzas (
     CONSTRAINT fk_fin_cat FOREIGN KEY ( categoria_id )
         REFERENCES categorias ( id )
 );
+/*
+Table FINANZAS creado.*/
 
 CREATE SEQUENCE seq_finanzas START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*
+Sequence SEQ_FINANZAS creado.*/
 
 -- configuracion
 CREATE TABLE configuracion (
@@ -52,8 +66,12 @@ CREATE TABLE configuracion (
     CONSTRAINT fk_conf_user FOREIGN KEY ( user_id )
         REFERENCES usuarios ( id )
 );
+/*
+Table CONFIGURACION creado.*/
 
 CREATE SEQUENCE seq_configuracion START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*
+Sequence SEQ_CONFIGURACION creado.*/
 
 -- reportes
 CREATE TABLE reportes (
@@ -67,8 +85,12 @@ CREATE TABLE reportes (
     CONSTRAINT fk_rep_user FOREIGN KEY ( user_id )
         REFERENCES usuarios ( id )
 );
+/*
+Table REPORTES creado.*/
 
 CREATE SEQUENCE seq_reportes START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*
+Table REPORTES creado.*/
 
 -- historial
 CREATE TABLE historial (
@@ -77,8 +99,10 @@ CREATE TABLE historial (
     accion         VARCHAR2(1000),
     fecha_registro TIMESTAMP DEFAULT systimestamp
 );
+/*Table HISTORIAL creado.*/
 
 CREATE SEQUENCE seq_historial START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*Sequence SEQ_HISTORIAL creado.*/
 
 -- alertas
 CREATE TABLE alertas (
@@ -91,8 +115,10 @@ CREATE TABLE alertas (
     CONSTRAINT fk_alert_user FOREIGN KEY ( user_id )
         REFERENCES usuarios ( id )
 );
+/*Table ALERTAS creado.*/
 
 CREATE SEQUENCE seq_alertas START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*Sequence SEQ_ALERTAS creado.*/
 
 -- familiares
 CREATE TABLE familiares (
@@ -104,8 +130,10 @@ CREATE TABLE familiares (
     CONSTRAINT fk_fam_user FOREIGN KEY ( user_id )
         REFERENCES usuarios ( id )
 );
+/*Table FAMILIARES creado.*/
 
 CREATE SEQUENCE seq_familiares START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*Sequence SEQ_FAMILIARES creado.*/
 
 -- metas_financieras
 CREATE TABLE metas_financieras (
@@ -119,8 +147,10 @@ CREATE TABLE metas_financieras (
     CONSTRAINT fk_meta_user FOREIGN KEY ( user_id )
         REFERENCES usuarios ( id )
 );
+/*Table METAS_FINANCIERAS creado.*/
 
 CREATE SEQUENCE seq_metas START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*Sequence SEQ_METAS creado.*/
 
 -- presupuestos
 CREATE TABLE presupuestos (
@@ -135,8 +165,11 @@ CREATE TABLE presupuestos (
     CONSTRAINT fk_pre_cat FOREIGN KEY ( categoria_id )
         REFERENCES categorias ( id )
 );
+/*
+Table PRESUPUESTOS creado.*/
 
 CREATE SEQUENCE seq_presupuestos START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*Sequence SEQ_PRESUPUESTOS creado.*/
 
 -- logs_acceso
 CREATE TABLE logs_acceso (
@@ -148,14 +181,15 @@ CREATE TABLE logs_acceso (
     CONSTRAINT fk_log_user FOREIGN KEY ( user_id )
         REFERENCES usuarios ( id )
 );
+/*Table LOGS_ACCESO creado.*/
 
 CREATE SEQUENCE seq_logs START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+/*Sequence SEQ_LOGS creado.*/
 
 
 
 
-
----                   Triggers
+---Triggers
 
 -- trg de usuarios
 CREATE OR REPLACE TRIGGER trg_usuarios_bi
@@ -258,6 +292,7 @@ EXCEPTION
         RAISE;
 END;
 /
+/*Procedure P_CREATE_USUARIO compilado*/
 
 -- Usuarios - READ
 CREATE OR REPLACE PROCEDURE p_read_usuario (
@@ -291,6 +326,8 @@ EXCEPTION
         p_fecha_registro := NULL;
 END;
 /
+/*Procedure P_READ_USUARIO compilado*/
+
 
 -- Usuarios - UPDATE
 CREATE OR REPLACE PROCEDURE p_update_usuario (
@@ -311,6 +348,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_UPDATE_USUARIO compilado*/
 
 -- Usuarios - DELETE
 CREATE OR REPLACE PROCEDURE p_delete_usuario (
@@ -324,6 +362,8 @@ BEGIN
     COMMIT;
 END;
 /
+/*
+Procedure P_UPDATE_USUARIO compilado*/
 
 -- Finanzas - CREATE
 CREATE OR REPLACE PROCEDURE p_create_finanza (
@@ -357,6 +397,7 @@ EXCEPTION
         RAISE;
 END;
 /
+/*Procedure P_CREATE_FINANZA compilado*/
 
 -- Finanzas - READ
 CREATE OR REPLACE PROCEDURE p_read_finanza (
@@ -386,6 +427,7 @@ EXCEPTION
         p_monto := NULL;
 END;
 /
+/*Procedure P_READ_FINANZA compilado*/
 
 -- Finanzas - UPDATE
 CREATE OR REPLACE PROCEDURE p_update_finanza (
@@ -404,6 +446,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_UPDATE_FINANZA compilado*/
 
 -- Finanzas - DELETE
 CREATE OR REPLACE PROCEDURE p_delete_finanza (
@@ -417,6 +460,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_DELETE_FINANZA compilado*/
 
 -- Metas - CREATE
 CREATE OR REPLACE PROCEDURE p_create_meta (
@@ -444,6 +488,7 @@ EXCEPTION
         RAISE;
 END;
 /
+/*Procedure P_CREATE_META compilado*/
 
 -- Metas - UPDATE progreso
 CREATE OR REPLACE PROCEDURE p_update_meta_progreso (
@@ -460,6 +505,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_UPDATE_META_PROGRESO compilado*/
 
 -- lista usuarios
 CREATE OR REPLACE PROCEDURE p_listar_usuarios IS
@@ -482,6 +528,7 @@ BEGIN
     END LOOP;
 END;
 /
+/*Procedure P_LISTAR_USUARIOS compilado*/
 
 -- buscar usuario por correo
 CREATE OR REPLACE PROCEDURE p_buscar_usuario_email (
@@ -512,6 +559,7 @@ EXCEPTION
         dbms_output.put_line('No existe usuario con ese correo.');
 END;
 /
+/*Procedure P_LISTAR_USUARIOS compilado*/
 
 -- Listar finanzas de un usuario
 CREATE OR REPLACE PROCEDURE p_listar_finanzas_usuario (
@@ -538,6 +586,8 @@ BEGIN
     END LOOP;
 END;
 /
+/*Procedure P_LISTAR_FINANZAS_USUARIO compilado*/
+
 
 -- Listar catg por usuario
 CREATE OR REPLACE PROCEDURE p_listar_categorias_usuario (
@@ -561,6 +611,7 @@ BEGIN
     END LOOP;
 END;
 /
+/*Procedure P_LISTAR_FINANZAS_USUARIO compilado*/
 
 -- Crear alerta
 CREATE OR REPLACE PROCEDURE p_crear_alerta (
@@ -587,6 +638,7 @@ BEGIN
     dbms_output.put_line('Alerta creada con ID=' || v_id);
 END;
 /
+/*Procedure P_CREAR_ALERTA compilado*/
 
 -- Eliminar alerta
 CREATE OR REPLACE PROCEDURE p_eliminar_alerta (
@@ -600,6 +652,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_ELIMINAR_ALERTA compilado*/
 
 -- Crear reporte
 CREATE OR REPLACE PROCEDURE p_crear_reporte (
@@ -626,6 +679,7 @@ BEGIN
     dbms_output.put_line('Reporte creado con ID=' || v_id);
 END;
 /
+/*Procedure P_CREAR_REPORTE compilado*/
 
 -- Eliminar reporte
 CREATE OR REPLACE PROCEDURE p_eliminar_reporte (
@@ -639,6 +693,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_ELIMINAR_REPORTE compilado*/
 
 -- Crear presupuesto
 CREATE OR REPLACE PROCEDURE p_crear_presupuesto (
@@ -666,6 +721,7 @@ BEGIN
     dbms_output.put_line('Presupuesto creado con ID=' || v_id);
 END;
 /
+/*Procedure P_CREAR_PRESUPUESTO compilado*/
 
 -- Actualizar presupuesto
 CREATE OR REPLACE PROCEDURE p_update_presupuesto (
@@ -682,6 +738,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_UPDATE_PRESUPUESTO compilado*/
 
 -- Eliminar presupuesto
 CREATE OR REPLACE PROCEDURE p_delete_presupuesto (
@@ -695,6 +752,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_DELETE_PRESUPUESTO compilado*/
 
 -- Crear familiar
 CREATE OR REPLACE PROCEDURE p_crear_familiar (
@@ -719,6 +777,7 @@ BEGIN
     dbms_output.put_line('Familiar creado con ID=' || v_id);
 END;
 /
+/*Procedure P_CREAR_FAMILIAR compilado*/
 
 -- Eliminar familiar
 CREATE OR REPLACE PROCEDURE p_delete_familiar (
@@ -732,6 +791,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_DELETE_FAMILIAR compilado*/
 
 -- Insertar historial
 CREATE OR REPLACE PROCEDURE p_insert_historial (
@@ -748,6 +808,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_INSERT_HISTORIAL compilado*/
 
 -- Marcar meta como completada
 CREATE OR REPLACE PROCEDURE p_marcar_meta_completada (
@@ -764,6 +825,7 @@ BEGIN
     COMMIT;
 END;
 /
+/*Procedure P_MARCAR_META_COMPLETADA compilado*/
 
 -- Total de ingresos de un usuario
 CREATE OR REPLACE FUNCTION f_total_ingresos_usuario (
@@ -786,6 +848,8 @@ BEGIN
     RETURN v_total;
 END;
 /
+/*Function F_TOTAL_INGRESOS_USUARIO compilado*/
+
 
 -- Total de gastos de un usuario
 CREATE OR REPLACE FUNCTION f_total_gastos_usuario (
@@ -808,6 +872,7 @@ BEGIN
     RETURN v_total;
 END;
 /
+/*Function F_TOTAL_GASTOS_USUARIO compilado*/
 
 -- Cantidad de alertas por usuario
 CREATE OR REPLACE FUNCTION f_total_alertas_usuario (
@@ -826,6 +891,7 @@ BEGIN
     RETURN v_count;
 END;
 /
+/*Function F_TOTAL_ALERTAS_USUARIO compilado*/
 
 -- Promedio de gasto mensual
 CREATE OR REPLACE FUNCTION f_promedio_gasto_mensual (
@@ -848,6 +914,7 @@ BEGIN
     RETURN v_prom;
 END;
 /
+/*Function F_TOTAL_ALERTAS_USUARIO compilado*/
 
 -- Total de metas completadas
 CREATE OR REPLACE FUNCTION f_total_metas_completadas (
@@ -867,6 +934,7 @@ BEGIN
     RETURN v_total;
 END;
 /
+/*Function F_TOTAL_METAS_COMPLETADAS compilado*/
 
 -- Porcentaje de ahorro
 CREATE OR REPLACE FUNCTION f_porcentaje_ahorro (
@@ -885,6 +953,7 @@ BEGIN
 
 END;
 /
+/*Function F_PORCENTAJE_AHORRO compilado*/
 
 -- Cantidad de reportes generados
 CREATE OR REPLACE FUNCTION f_total_reportes_usuario (
@@ -903,6 +972,7 @@ BEGIN
     RETURN v_total;
 END;
 /
+/*Function F_TOTAL_REPORTES_USUARIO compilado*/
 
 
 
@@ -939,6 +1009,7 @@ EXCEPTION
         RETURN 0;
 END;
 /
+/*Function F_GET_BALANCE compilado*/
 
 -- Avance de una meta en  %
 CREATE OR REPLACE FUNCTION f_avance_meta (
@@ -969,6 +1040,7 @@ EXCEPTION
         RETURN 0;
 END;
 /
+/*Function F_AVANCE_META compilado*/
 
 -- Total gastos de un mes
 CREATE OR REPLACE FUNCTION f_total_gastos_mes (
@@ -995,6 +1067,7 @@ BEGIN
     RETURN v_total;
 END;
 /
+/*Function F_TOTAL_GASTOS_MES compilado*/
 
 --  listar metas completadas
 CREATE OR REPLACE PROCEDURE p_listar_metas_completadas IS
@@ -1004,6 +1077,7 @@ BEGIN
   END LOOP;
 END;
 /
+/*Procedure P_LISTAR_METAS_COMPLETADAS compilado*/
 
 -- eliminar usuario en cascada
 CREATE OR REPLACE PROCEDURE p_eliminar_usuario_cascada(p_id IN NUMBER) AS
@@ -1015,6 +1089,7 @@ BEGIN
   COMMIT;
 END;
 /
+/*Procedure P_ELIMINAR_USUARIO_CASCADA compilado*/
 
 
 
@@ -1043,6 +1118,7 @@ CREATE OR REPLACE VIEW vw_user_summary AS
 
 u;
 /
+/*View VW_USER_SUMMARY creado.*/
 
 CREATE OR REPLACE VIEW vw_metas_progreso AS
     SELECT
@@ -1057,6 +1133,8 @@ CREATE OR REPLACE VIEW vw_metas_progreso AS
              metas_financieras m
         JOIN usuarios u ON m.user_id = u.id;
 /
+/*View VW_METAS_PROGRESO creado.*/
+
 
 CREATE OR REPLACE VIEW vw_gastos_mensuales AS
 SELECT u.id usuario_id, u.nombre, EXTRACT(MONTH FROM f.fecha_trx) mes,
@@ -1065,12 +1143,15 @@ FROM finanzas f JOIN usuarios u ON f.user_id=u.id
 WHERE f.tipo='gasto'
 GROUP BY u.id, u.nombre, EXTRACT(MONTH FROM f.fecha_trx), EXTRACT(YEAR FROM f.fecha_trx);
 /
+/*View VW_METAS_PROGRESO creado.*/
+
 
 -- usuarios con su total de alertas
 CREATE OR REPLACE VIEW vw_usuarios_alertas AS
 SELECT u.id, u.nombre, f_total_alertas_usuario(u.id) AS total_alertas
 FROM usuarios u;
 /
+/*View VW_METAS_PROGRESO creado.*/
 
 -- resumen de ingresos gastos y balance
 CREATE OR REPLACE VIEW vw_finanzas_resumen AS
@@ -1080,6 +1161,7 @@ SELECT u.id usuario_id, u.nombre,
        f_get_balance(u.id) balance
 FROM usuarios u;
 /
+/*View VW_FINANZAS_RESUMEN creado.*/
 
 -- metas completadas
 CREATE OR REPLACE VIEW vw_metas_completadas AS
@@ -1087,6 +1169,7 @@ SELECT m.id, u.nombre usuario, m.nombre meta, m.monto_objetivo, m.estado
 FROM metas_financieras m JOIN usuarios u ON m.user_id=u.id
 WHERE LOWER(m.estado)='completado';
 /
+/*View VW_METAS_COMPLETADAS creado.*/
 
 -- gastos por categoría
 CREATE OR REPLACE VIEW vw_gastos_por_categoria AS
@@ -1095,6 +1178,7 @@ FROM finanzas f JOIN categorias c ON f.categoria_id=c.id
 WHERE f.tipo='gasto'
 GROUP BY c.nombre;
 /
+/*View VW_GASTOS_POR_CATEGORIA creado.*/
 
 -- usuarios mas de 3 meses
 CREATE OR REPLACE VIEW vw_usuarios_metas_activas AS
@@ -1104,6 +1188,7 @@ WHERE LOWER(m.estado)='en progreso'
 GROUP BY u.id, u.nombre
 HAVING COUNT(m.id) > 3;
 /
+/*View VW_USUARIOS_METAS_ACTIVAS creado.*/
 
 -- Vhistorial reciente con fecha de registro
 CREATE OR REPLACE VIEW vw_historial_reciente AS
@@ -1111,6 +1196,7 @@ SELECT h.user_id, u.nombre, h.accion, h.fecha_registro
 FROM historial h JOIN usuarios u ON h.user_id=u.id
 WHERE h.fecha_registro > SYSDATE - 30;
 /
+/*View VW_HISTORIAL_RECIENTE creado.*/
 
 -- }usuarios con ahorros positivo
 CREATE OR REPLACE VIEW vw_usuarios_ahorradores AS
@@ -1119,6 +1205,7 @@ SELECT u.id, u.nombre,
 FROM usuarios u
 WHERE f_porcentaje_ahorro(u.id) > 0;
 /
+/*View VW_USUARIOS_AHORRADORES creado.*/
 
 --                      Paquetes y cursores
 
@@ -1129,6 +1216,7 @@ CREATE OR REPLACE PACKAGE fingo_pkg IS
   FUNCTION f_balance_resumido(p_user NUMBER) RETURN NUMBER;
 END fingo_pkg;
 /
+/*Package FINGO_PKG compilado*/
 
 CREATE OR REPLACE PACKAGE BODY fingo_pkg IS
   PROCEDURE p_listar_finanzas(p_user NUMBER) IS
@@ -1152,6 +1240,7 @@ CREATE OR REPLACE PACKAGE BODY fingo_pkg IS
   END f_balance_resumido;
 END fingo_pkg;
 /
+/*Package Body FINGO_PKG compilado*/
 
 -- pkg_usuarios
 CREATE OR REPLACE PACKAGE pkg_usuarios IS
@@ -1161,6 +1250,7 @@ CREATE OR REPLACE PACKAGE pkg_usuarios IS
   FUNCTION f_total_usuarios RETURN NUMBER;
 END pkg_usuarios;
 /
+/*Package PKG_USUARIOS compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_usuarios IS
   PROCEDURE p_listar_usuarios IS
@@ -1182,6 +1272,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_usuarios IS
   END;
 END pkg_usuarios;
 /
+/*Package Body PKG_USUARIOS compilado*/
 
 -- pkg_finanzas
 CREATE OR REPLACE PACKAGE pkg_finanzas IS
@@ -1194,6 +1285,7 @@ CREATE OR REPLACE PACKAGE pkg_finanzas IS
   FUNCTION f_total_transacciones(p_user NUMBER) RETURN NUMBER;
 END pkg_finanzas;
 /
+/*Package PKG_FINANZAS compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_finanzas IS
   PROCEDURE p_listar_gastos_mes(p_user NUMBER, p_mes NUMBER, p_anio NUMBER) IS
@@ -1210,6 +1302,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_finanzas IS
   END;
 END pkg_finanzas;
 /
+/*Package Body PKG_FINANZAS compilado*/
 
 -- pkg_metas
 CREATE OR REPLACE PACKAGE pkg_metas IS
@@ -1220,6 +1313,9 @@ CREATE OR REPLACE PACKAGE pkg_metas IS
   FUNCTION f_promedio_avance(p_user NUMBER) RETURN NUMBER;
 END pkg_metas;
 /
+/*
+Package PKG_METAS compilado*/
+
 
 CREATE OR REPLACE PACKAGE BODY pkg_metas IS
   PROCEDURE p_listar_metas_usuario(p_user NUMBER) IS
@@ -1237,6 +1333,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_metas IS
   END;
 END pkg_metas;
 /
+/*Package Body PKG_METAS compilado*/
 
 -- pkg_alertas
 CREATE OR REPLACE PACKAGE pkg_alertas IS
@@ -1245,6 +1342,7 @@ CREATE OR REPLACE PACKAGE pkg_alertas IS
   FUNCTION f_alertas_recientes(p_dias NUMBER) RETURN NUMBER;
 END pkg_alertas;
 /
+/*Package PKG_ALERTAS compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_alertas IS
   PROCEDURE p_listar_alertas_usuario(p_user NUMBER) IS
@@ -1261,6 +1359,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_alertas IS
   END;
 END pkg_alertas;
 /
+/*Package Body PKG_ALERTAS compilado*/
 
 -- pkg_reportes
 CREATE OR REPLACE PACKAGE pkg_reportes IS
@@ -1269,6 +1368,8 @@ CREATE OR REPLACE PACKAGE pkg_reportes IS
   FUNCTION f_total_reportes RETURN NUMBER;
 END pkg_reportes;
 /
+/*Package PKG_REPORTES compilado*/
+
 
 CREATE OR REPLACE PACKAGE BODY pkg_reportes IS
   PROCEDURE p_listar_reportes_usuario(p_user NUMBER) IS
@@ -1285,6 +1386,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_reportes IS
   END;
 END pkg_reportes;
 /
+/*Package Body PKG_REPORTES compilado*/
 
 -- pkg_presupuestos
 CREATE OR REPLACE PACKAGE pkg_presupuestos IS
@@ -1293,6 +1395,7 @@ CREATE OR REPLACE PACKAGE pkg_presupuestos IS
   FUNCTION f_total_presupuesto_anual(p_user NUMBER, p_anio NUMBER) RETURN NUMBER;
 END pkg_presupuestos;
 /
+/*Package PKG_PRESUPUESTOS compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_presupuestos IS
   PROCEDURE p_listar_presupuestos_usuario(p_user NUMBER) IS
@@ -1309,6 +1412,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_presupuestos IS
   END;
 END pkg_presupuestos;
 /
+/*Package Body PKG_PRESUPUESTOS compilado*/
 
 -- pkg_familiares
 CREATE OR REPLACE PACKAGE pkg_familiares IS
@@ -1316,6 +1420,7 @@ CREATE OR REPLACE PACKAGE pkg_familiares IS
   PROCEDURE p_listar_familiares_usuario(p_user NUMBER);
 END pkg_familiares;
 /
+/*Package PKG_FAMILIARES compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_familiares IS
   PROCEDURE p_listar_familiares_usuario(p_user NUMBER) IS
@@ -1326,6 +1431,8 @@ CREATE OR REPLACE PACKAGE BODY pkg_familiares IS
   END;
 END pkg_familiares;
 /
+/*
+Package Body PKG_FAMILIARES compilado*/
 
 -- pkg_historial
 CREATE OR REPLACE PACKAGE pkg_historial IS
@@ -1333,6 +1440,7 @@ CREATE OR REPLACE PACKAGE pkg_historial IS
   PROCEDURE p_mostrar_historial_usuario(p_user NUMBER);
 END pkg_historial;
 /
+/*Package PKG_HISTORIAL compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_historial IS
   PROCEDURE p_mostrar_historial_usuario(p_user NUMBER) IS
@@ -1343,6 +1451,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_historial IS
   END;
 END pkg_historial;
 /
+/*Package Body PKG_HISTORIAL compilado*/
 
 -- pkg_configuracion
 CREATE OR REPLACE PACKAGE pkg_configuracion IS
@@ -1351,6 +1460,7 @@ CREATE OR REPLACE PACKAGE pkg_configuracion IS
   PROCEDURE p_actualizar_notificaciones(p_user NUMBER, p_estado VARCHAR2);
 END pkg_configuracion;
 /
+/*Package PKG_CONFIGURACION compilado*/
 
 CREATE OR REPLACE PACKAGE BODY pkg_configuracion IS
   PROCEDURE p_listar_config IS
@@ -1366,5 +1476,6 @@ CREATE OR REPLACE PACKAGE BODY pkg_configuracion IS
   END;
 END pkg_configuracion;
 /
+/*Package Body PKG_CONFIGURACION compilado*/
 
 
